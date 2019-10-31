@@ -30,6 +30,21 @@ class Pgl():
     def set_auto_update(fn, rate):
         pyglet.clock.schedule_interval(fn, 1 / rate) 
 
+    def point2d(self, p, sz, **kwargs):
+        c = kwargs.get('c', None)
+        if c is not None:
+            color = c
+        else:
+            color = [255, 255, 255]
+
+        pyglet.gl.glPointSize(sz)
+
+        return self.batch.add(
+          1, pyglet.gl.GL_POINTS, None,
+          ('v2f', (p.x, p.y)),
+          ('c3B', color)
+        )
+
 
     def line2d(self, p1, p2, **kwargs):
         w = kwargs.get('w', 0)

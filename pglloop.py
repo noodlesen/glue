@@ -41,13 +41,10 @@ def auto_update(dt):
 @pgl.window.event
 def on_draw():
     pgl.window.clear()
+    pgl.point2d(C(200,200), 50, c=[255, 0, 0])
+    pgl.point2d(C(300,300), 10, c=[0, 0, 255])
     pgl.batch.draw()
-    pyglet.gl.glPointSize(12)
-    pyglet.graphics.draw(
-      3, pyglet.gl.GL_POINTS,
-      ('v2i', (10, 15, 30, 35, 100, 100)),
-      ('c3B', (255, 255, 0, 255, 0, 0, 50, 0, 255))
-    )
+
     # pyglet.gl.glLineWidth(8)
     # pyglet.graphics.draw(
     #   2, pyglet.gl.GL_LINES,
