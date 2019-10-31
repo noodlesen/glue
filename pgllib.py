@@ -64,3 +64,12 @@ class Pgl():
 
     def run(p):
         pyglet.app.run()
+
+
+class Vob():  # VISUAL OBJECT
+    
+    def __init__(self, name, gtype, vl, groups=[]):
+        self.name = name
+        self.gtype = gtype
+        self.vl = vl
+        self.groups = groups
