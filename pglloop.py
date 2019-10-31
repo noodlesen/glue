@@ -42,11 +42,12 @@ def auto_update(dt):
 def on_draw():
     pgl.window.clear()
     pgl.batch.draw()
-    # pyglet.graphics.draw(
-    #   3, pyglet.gl.GL_POINTS,
- #      ('v2i', (10, 15, 30, 35, 100, 100)),
- #      ('c3B', (255, 255, 0, 255, 0, 0, 50, 0, 255))
-    # )
+    pyglet.gl.glPointSize(12)
+    pyglet.graphics.draw(
+      3, pyglet.gl.GL_POINTS,
+      ('v2i', (10, 15, 30, 35, 100, 100)),
+      ('c3B', (255, 255, 0, 255, 0, 0, 50, 0, 255))
+    )
     # pyglet.gl.glLineWidth(8)
     # pyglet.graphics.draw(
     #   2, pyglet.gl.GL_LINES,
@@ -70,7 +71,8 @@ def on_draw():
 if __name__ == "__main__":
     # Update the game 120 times per second
     if AUTO_LOOP:
-        pyglet.clock.schedule_interval(auto_update, 1 / 15.0)  # AUTO LOOP
+        #pyglet.clock.schedule_interval(auto_update, 1 / 15.0)  # AUTO LOOP
+        pgl.set_auto_update(auto_update, 15)
 
     # Tell pyglet to do its thing
     #pyglet.app.run()

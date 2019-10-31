@@ -27,6 +27,10 @@ class Pgl():
         self.batch = pyglet.graphics.Batch()
 
 
+    def set_auto_update(fn, rate):
+        pyglet.clock.schedule_interval(fn, 1 / rate) 
+
+
     def line2d(self, p1, p2, **kwargs):
         w = kwargs.get('w', 0)
         if w > 0:
