@@ -18,10 +18,13 @@ bricks = []
 def manual_update():
     global bricks
     if len(bricks) == 0:
-        vl = pgl.batch.add(
-            4, pyglet.gl.GL_POLYGON, None,
-            ('v2f', (0,0,0,10,20,10,20,0)),
-            ('c3B', (255, 255, 0,255, 255, 0,255, 255, 0,255, 255, 0,)),
+        p1 = C(0, 20)
+        vl = pgl.poly2d(
+            p1,
+            C(40, 20),
+            C(40, 0),
+            C(0, 0),
+            c = (255,255,0)
         )
         bricks.append(vl)
 

@@ -2,7 +2,7 @@ import pyglet
 
 class C():
 
-    def init(self, x, y, z=None):
+    def __init__(self, x, y, z=None):
         self.x = x
         self.y = y
         self.z = z
@@ -27,7 +27,7 @@ class Pgl():
         self.batch = pyglet.graphics.Batch()
 
 
-    def line2d(p1, p2, **kwargs):
+    def line2d(self, p1, p2, **kwargs):
         w = kwargs.get('w', 0)
         if w > 0:
             pyglet.gl.glLineWidth(w)
@@ -43,6 +43,22 @@ class Pgl():
         return self.batch.add(
             2, pyglet.gl.GL_LINES, None,
             ('v2f', (p1.x, p1.y, p2.x, p2.y)),
+            ('c3B', colors),
+        )
+
+    def poly2d(self, ul, ur, lr, ll, **kwargs):
+
+        c = kwargs.get('c', None)
+        if c is not None:
+            color = c
+        else:
+            color = [255, 255, 255]
+
+        colors = tuple(color*4)
+
+        return self.batch.add(
+            4, pyglet.gl.GL_POLYGON, None,
+            ('v2f', (ul.x,ul.y,ur.x,ur.y,lr.x,lr.y,ll.x,ll.y)),
             ('c3B', colors),
         )
 
