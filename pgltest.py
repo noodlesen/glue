@@ -1,7 +1,7 @@
 """test drawing."""
 from pgllib import C, Mob
 from pglinit import pgl, DEFAULT_W, DEFAULT_H
-
+import datetime
 
 @pgl.window.event
 def on_draw():
@@ -23,9 +23,11 @@ def on_mouse_motion(x, y, dx, dy):
 
 @pgl.window.event
 def on_key_press(symbol, modifiers):
+    pgl.last_keydown = datetime.datetime.now()
+    pgl.last_key = symbol
     offs = 5
     if modifiers & pgl.key.MOD_SHIFT:
-        offs=25
+        offs = 25
         print('SHIFT')
     for v in pgl.vobs:
         if v.mob == sq:
@@ -38,8 +40,18 @@ def on_key_press(symbol, modifiers):
             if symbol == pgl.key.LEFT:
                 v.shift((-offs, 0))
 
+@pgl.window.event
+def on_key_release(symbol, modifiers):
+    pgl.last_keyup = datetime.datetime.now()
+
+def auto_check(dt):
+    if pgl.last_keyup < pgl.last_keydown and (pgl.last_keyup-datetime.datetime.now()).seconds > 1:
+        print ('HOLD')
+
+
 
 if __name__ == "__main__":
+    pgl.set_auto_check(auto_check, 3)
     sq = Mob('square')
     pgl.draw_rect2d(C(250, 250), 100, 100, c=[255, 200, 10], mob=sq)
     chh = Mob('crosshair_h')

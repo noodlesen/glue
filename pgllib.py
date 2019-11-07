@@ -1,4 +1,5 @@
 import pyglet
+import datetime
 
 
 def check_color(**kwargs):  # private
@@ -57,8 +58,12 @@ class Pgl():
         self.vobs = []
         self.mobs = []
         self.key = pyglet.window.key
+        self.last_key = None
+        now = datetime.datetime.now()
+        self.last_keyup = now
+        self.last_keydown = now
 
-    def set_auto_update(fn, rate):
+    def set_auto_check(self, fn, rate):
         pyglet.clock.schedule_interval(fn, 1 / rate) 
 
     def draw_point2d(self, p, sz, **kwargs):
