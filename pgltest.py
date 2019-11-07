@@ -1,30 +1,6 @@
 """test drawing."""
-from pgllib import C, Pgl
-from pglui import Frame
+from pgllib import C, Mob
 from pglinit import pgl
-
-W = 1400
-H = 800
-
-
-
-
-frames = []
-vobs = []
-
-mf = Frame('main', main=True)
-mf.pd = 12
-mf.rebuild()
-s1, s2 = mf.split('v', 40)
-s1.pd = 10
-s2.pd = 10
-
-s1.rebuild()
-s2.rebuild()
-
-def manual_update():
-    pass
-
 
 
 @pgl.window.event
@@ -35,13 +11,26 @@ def on_draw():
 
 @pgl.window.event
 def on_key_press(symbol, modifiers):
-    print('A key was pressed')
-    manual_update()
+    offs = 5
+    if modifiers & pgl.key.MOD_SHIFT:
+        offs=25
+        print('SHIFT')
+    for v in pgl.vobs:
+        
 
+        if v.mob == sq:
+            if symbol == pgl.key.UP:
+                v.shift((0, offs))
+            if symbol == pgl.key.RIGHT:
+                v.shift((offs, 0))
+            if symbol == pgl.key.DOWN:
+                v.shift((0, -offs))
+            if symbol == pgl.key.LEFT:
+                v.shift((-offs, 0))
 
 
 if __name__ == "__main__":
-    mf.draw_itself()
-    s2.draw_itself()
-    s1.draw_itself()
+    sq = Mob('square')
+    pgl.draw_rect2d(C(250, 250), 100, 100, c=[255, 200, 10], mob=sq)
+    #pgl.draw_point2d(C(250, 250), 10, c=[255, 200, 10], mob=sq)
     pgl.run()

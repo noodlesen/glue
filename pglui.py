@@ -67,6 +67,6 @@ class Frame():
 
     def draw_itself(self):
         if self.pd == 0:
-            pgl.draw_rect2d(self.ul, self.lr, w=4, c=[255, 0, 0])
+            pgl.draw_rect2d(self.ul, self.lr, w=2, c=[20, 20, 20])
         else:
-            pgl.draw_rect2d(self.iul, self.ilr, w=4, c=[255, 0, 0])
+            pgl.draw_rect2d(self.iul, self.ilr, w=2, c=[20, 20, 20])
