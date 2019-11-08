@@ -2,6 +2,7 @@
 from pgllib import C, Mob
 from pglinit import pgl, DEFAULT_W, DEFAULT_H
 import datetime
+from random import randint
 
 @pgl.window.event
 def on_draw():
@@ -58,4 +59,8 @@ if __name__ == "__main__":
     pgl.draw_line2d(C(0,0), C(DEFAULT_W,0), c=[34,34,34], mob=chh)
     chv = Mob('crosshair_v')
     pgl.draw_line2d(C(0,0), C(0,DEFAULT_H), c=[34,34,34], mob=chv)
+    gdata = [randint(-20,20) for n in range(1,40)]
+    for i in range(1, len(gdata)-1):
+        gdata[i]+=gdata[i-1]
+    print(gdata)
     pgl.run()
